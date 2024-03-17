@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="GameLauncher.Controls.ImageWithInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GameLauncher.Controls"
+             mc:Ignorable="d" MouseLeftButtonUp="ImageWithInfo_MouseLeftButtonUp"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="{Binding ImagePath}" />
+        </Grid.Background>
+        <TextBlock Grid.Row="1" Foreground="White" FontSize="40" Text="{Binding ImageDescription, FallbackValue=This is a description.}" Margin="10,0" />
+        <TextBlock Grid.Row="2" Foreground="LightGray" FontSize="25" Text="{Binding ImageSubDescription, FallbackValue=Hello this is a sub-description about what is above.}" Margin="10, 0" />
+    </Grid>
+</UserControl>

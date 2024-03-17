@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34018.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "..\Models\Models\Models.csproj", "{605759D1-DFAC-4CAD-B60D-7DF0C12AC270}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TOMEBL", "..\TOMEBL\TOMEBL\TOMEBL.csproj", "{59895971-D699-4F63-BF5B-A2BABAF41E14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TOMEDBDataAccess", "..\TOMEDBDataAccess\TOMEDBDataAccess\TOMEDBDataAccess.csproj", "{BA1CEC77-C91A-4806-A374-85F142696ABF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TOMEServer", "..\TOMEServer\TOMEServer\TOMEServer.csproj", "{F6D5B4FD-B816-45C0-8305-FA5B1F2CF880}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonData", "..\CommonData\CommonData\CommonData.csproj", "{6963F234-2D09-4BF1-AAE0-4548D30F9C18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TOMEUnitTests", "TOMEUnitTests\TOMEUnitTests.csproj", "{F42E6665-1391-484F-8948-15CB0CC81C79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "..\Interfaces\Interfaces\Interfaces.csproj", "{CCF0AEA7-0AD0-4AC6-8848-916BC2B67864}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{605759D1-DFAC-4CAD-B60D-7DF0C12AC270}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{605759D1-DFAC-4CAD-B60D-7DF0C12AC270}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{605759D1-DFAC-4CAD-B60D-7DF0C12AC270}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{605759D1-DFAC-4CAD-B60D-7DF0C12AC270}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59895971-D699-4F63-BF5B-A2BABAF41E14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59895971-D699-4F63-BF5B-A2BABAF41E14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59895971-D699-4F63-BF5B-A2BABAF41E14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59895971-D699-4F63-BF5B-A2BABAF41E14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA1CEC77-C91A-4806-A374-85F142696ABF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA1CEC77-C91A-4806-A374-85F142696ABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA1CEC77-C91A-4806-A374-85F142696ABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA1CEC77-C91A-4806-A374-85F142696ABF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6D5B4FD-B816-45C0-8305-FA5B1F2CF880}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6D5B4FD-B816-45C0-8305-FA5B1F2CF880}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6D5B4FD-B816-45C0-8305-FA5B1F2CF880}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6D5B4FD-B816-45C0-8305-FA5B1F2CF880}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6963F234-2D09-4BF1-AAE0-4548D30F9C18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6963F234-2D09-4BF1-AAE0-4548D30F9C18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6963F234-2D09-4BF1-AAE0-4548D30F9C18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6963F234-2D09-4BF1-AAE0-4548D30F9C18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F42E6665-1391-484F-8948-15CB0CC81C79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F42E6665-1391-484F-8948-15CB0CC81C79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F42E6665-1391-484F-8948-15CB0CC81C79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F42E6665-1391-484F-8948-15CB0CC81C79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCF0AEA7-0AD0-4AC6-8848-916BC2B67864}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCF0AEA7-0AD0-4AC6-8848-916BC2B67864}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCF0AEA7-0AD0-4AC6-8848-916BC2B67864}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCF0AEA7-0AD0-4AC6-8848-916BC2B67864}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {34EA7EA8-7AE5-4A5D-9628-E8714D18742F}
+	EndGlobalSection
+EndGlobal

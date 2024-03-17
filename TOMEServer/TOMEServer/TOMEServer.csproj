@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.10" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CommonData">
+      <HintPath>..\..\CommonData\CommonData\bin\Debug\CommonData.dll</HintPath>
+    </Reference>
+    <Reference Include="Models">
+      <HintPath>..\..\Models\Models\bin\Debug\Models.dll</HintPath>
+    </Reference>
+    <Reference Include="TOMEBL">
+      <HintPath>..\..\TOMEBL\TOMEBL\bin\Debug\TOMEBL.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
