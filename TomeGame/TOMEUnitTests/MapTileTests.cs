@@ -19,7 +19,7 @@ namespace TOMEUnitTests
         public void MapTileInfo_InsertReadAndDelete_1()
         {
             long chunkToTest = int.MaxValue;
-            bool success = MapTileInfoDA.InsertRecord(new Models.Game.MapTileInfo()
+            var mapTile = new Models.Game.MapTileInfo()
             {
                 IsWalkable = true,
                 ChunkId = chunkToTest,
@@ -27,9 +27,10 @@ namespace TOMEUnitTests
                 MapTileType = MapTileTypes.Grass,
                 XPosition = 1,
                 YPosition = 1,
-            });
+            };
+            bool success = MapTileInfoDA.InsertRecord(mapTile);
             Assert.IsTrue(success);
-            var mapTiles = MapTileInfoDA.GetAllMapTileInfoByChunkId(chunkToTest);
+            var mapTiles = MapTileInfoDA.GetAllMapTileInfoByChunkId(mapTile.MapTileId);
             Assert.IsTrue(mapTiles.Count == 1);
             success = MapTileInfoDA.DeleteByChunkId(chunkToTest);
             Assert.IsTrue(success);

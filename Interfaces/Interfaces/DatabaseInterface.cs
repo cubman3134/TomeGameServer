@@ -16,7 +16,7 @@ namespace Interfaces
         {
             data = default(T);
             List<T> dataList = null;
-            bool success = RunStoredProcedure<T>(procedureName, true, parameters, out dataList);
+            bool success = RunStoredProcedure<T>(procedureName, true, parameters, out dataList, out _);
             if (success)
             {
                 data = dataList[0];
@@ -26,12 +26,12 @@ namespace Interfaces
 
         public bool ReadRecords<T>(string procedureName, List<SqlParameter> parameters, out List<T> dataList)
         {
-            return RunStoredProcedure<T>(procedureName, true, parameters, out dataList);
+            return RunStoredProcedure<T>(procedureName, true, parameters, out dataList, out _);
         }
 
         public bool UpdateRecord<T>(string procedureName, List<SqlParameter> parameters)
         {
-            return RunStoredProcedure<T>(procedureName, false, parameters, out List<T> dataList);
+            return RunStoredProcedure<T>(procedureName, false, parameters, out List<T> dataList, out _);
         }
 
         public bool UpdateRecord<T>(string procedureName, T updateObject, List<string> ignorableProperties = null)
@@ -54,11 +54,27 @@ namespace Interfaces
                 //}
                 parameterDataList.Add(new SqlParameter($"@{prop.Name}", parameterValue));
             }
-            return RunStoredProcedure<T>(procedureName, false, parameterDataList, out List<T> dataList);
+            bool success = RunStoredProcedure<T>(procedureName, false, parameterDataList, out List<T> dataList, out string propertyName);
+            if (success)
+            {
+                var updatedIdentity = dataList[0];
+                foreach (var property in updatedIdentity.GetType().GetProperties())
+                {
+                    if (property.Name != propertyName)
+                    {
+                        continue;
+                    }
+                    // this is part of the object's identity, set it on the updated record
+                    property.SetValue(updateObject, property.GetValue(updatedIdentity));
+                    break;
+                }
+            }
+            return success;
         }
 
-        private bool RunStoredProcedure<T>(string procedureName, bool readRecord, List<SqlParameter> parameters, out List<T> dataList)
+        private bool RunStoredProcedure<T>(string procedureName, bool readRecord, List<SqlParameter> parameters, out List<T> dataList, out string identity)
         {
+            identity = string.Empty;
             dataList = new List<T>();
             try
             {
@@ -72,37 +88,45 @@ namespace Interfaces
                         command.Parameters.AddRange(parameters.ToArray());
                         using (SqlDataReader dataReader = command.ExecuteReader())
                         {
-                            if (readRecord)
+                            dataList = DataReaderMapToList<T>(dataReader, readRecord, out identity);
+                            if (!dataList.Any())
                             {
-                                dataList = DataReaderMapToList<T>(dataReader);
-                                if (!dataList.Any())
-                                {
-                                    return false;
-                                }
+                                return false;
                             }
                         }
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
             return true;
         }
 
-        private List<T> DataReaderMapToList<T>(SqlDataReader dr)
+        private List<T> DataReaderMapToList<T>(SqlDataReader dataReader, bool readRecord, out string identity)
         {
+            identity = string.Empty;
             List<T> list = new List<T>();
             T obj = default(T);
-            while (dr.Read())
+            while (dataReader.Read())
             {
                 obj = Activator.CreateInstance<T>();
-                foreach (PropertyInfo prop in obj.GetType().GetProperties())
+                // identity
+                if (!readRecord && dataReader.FieldCount == 1)
                 {
-                    if (!object.Equals(dr[prop.Name], DBNull.Value))
+                    var propertyToSet = obj.GetType().GetProperties().First();
+                    propertyToSet.SetValue(obj, Convert.ChangeType(dataReader.GetValue(0), propertyToSet.PropertyType));
+                    identity = propertyToSet.Name;
+                }
+                else
+                {
+                    foreach (PropertyInfo prop in obj.GetType().GetProperties())
                     {
-                        prop.SetValue(obj, dr[prop.Name], null);
+                        if (!object.Equals(dataReader[prop.Name], DBNull.Value))
+                        {
+                            prop.SetValue(obj, dataReader[prop.Name]);
+                        }
                     }
                 }
                 list.Add(obj);
