@@ -30,7 +30,7 @@ namespace TOMEUnitTests
             };
             bool success = MapTileInfoDA.InsertRecord(mapTile);
             Assert.IsTrue(success);
-            var mapTiles = MapTileInfoDA.GetAllMapTileInfoByChunkId(mapTile.MapTileId);
+            var mapTiles = MapTileInfoDA.GetAllMapTileInfoByChunkId(mapTile.ChunkId);
             Assert.IsTrue(mapTiles.Count == 1);
             success = MapTileInfoDA.DeleteByChunkId(chunkToTest);
             Assert.IsTrue(success);

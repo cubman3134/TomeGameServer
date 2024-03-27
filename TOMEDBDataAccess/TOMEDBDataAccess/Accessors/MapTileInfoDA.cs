@@ -35,7 +35,7 @@ namespace TOMEDBDataAccess.Accessors
             {
                 new SqlParameter("@ChunkId", chunkId)
             };
-            return DatabaseInfo.Instance.UpdateRecord<MapTileInfo>("pp_MTIDeleteAllByChunkId", parameters);
+            return DatabaseInfo.Instance.DeleteRecords("pp_MTIDeleteAllByChunkId", parameters);
         }
     }
 }

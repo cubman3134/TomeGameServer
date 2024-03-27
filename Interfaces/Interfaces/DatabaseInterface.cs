@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Interfaces
 {
@@ -14,9 +13,8 @@ namespace Interfaces
 
         public bool ReadRecord<T>(string procedureName, List<SqlParameter> parameters, out T data)
         {
-            data = default(T);
-            List<T> dataList = null;
-            bool success = RunStoredProcedure<T>(procedureName, true, parameters, out dataList, out _);
+            data = default;
+            bool success = RunStoredProcedure<T>(procedureName, StatementType.Select, parameters, out List<T> dataList, out _);
             if (success)
             {
                 data = dataList[0];
@@ -26,12 +24,17 @@ namespace Interfaces
 
         public bool ReadRecords<T>(string procedureName, List<SqlParameter> parameters, out List<T> dataList)
         {
-            return RunStoredProcedure<T>(procedureName, true, parameters, out dataList, out _);
+            return RunStoredProcedure<T>(procedureName, StatementType.Select, parameters, out dataList, out _);
         }
 
         public bool UpdateRecord<T>(string procedureName, List<SqlParameter> parameters)
         {
-            return RunStoredProcedure<T>(procedureName, false, parameters, out List<T> dataList, out _);
+            return RunStoredProcedure<T>(procedureName, StatementType.Update, parameters, out _, out _);
+        }
+
+        public bool DeleteRecords(string procedureName, List<SqlParameter> parameters)
+        {
+            return RunStoredProcedure<object>(procedureName, StatementType.Delete, parameters, out _, out _);
         }
 
         public bool UpdateRecord<T>(string procedureName, T updateObject, List<string> ignorableProperties = null)
@@ -43,18 +46,10 @@ namespace Interfaces
                 {
                     continue;
                 }
-                object parameterValue = null;
-                /*if (prop.PropertyType.BaseType == typeof(Enum))
-                {
-                    parameterValue = Convert.ChangeType(prop.GetValue(updateObject, null), Enum.GetUnderlyingType(prop.PropertyType));
-                }
-                else
-                {*/
-                    parameterValue = prop.GetValue(updateObject, null);
-                //}
+                object parameterValue = prop.GetValue(updateObject, null);
                 parameterDataList.Add(new SqlParameter($"@{prop.Name}", parameterValue));
             }
-            bool success = RunStoredProcedure<T>(procedureName, false, parameterDataList, out List<T> dataList, out string propertyName);
+            bool success = RunStoredProcedure<T>(procedureName, StatementType.Update, parameterDataList, out List<T> dataList, out string propertyName);
             if (success)
             {
                 var updatedIdentity = dataList[0];
@@ -72,8 +67,9 @@ namespace Interfaces
             return success;
         }
 
-        private bool RunStoredProcedure<T>(string procedureName, bool readRecord, List<SqlParameter> parameters, out List<T> dataList, out string identity)
+        private bool RunStoredProcedure<T>(string procedureName, StatementType statementType, List<SqlParameter> parameters, out List<T> dataList, out string identity)
         {
+            
             identity = string.Empty;
             dataList = new List<T>();
             try
@@ -84,12 +80,12 @@ namespace Interfaces
                     using (SqlCommand command = new SqlCommand(procedureName))
                     {
                         command.Connection = connection;
-                        command.CommandType = System.Data.CommandType.StoredProcedure;
+                        command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddRange(parameters.ToArray());
                         using (SqlDataReader dataReader = command.ExecuteReader())
                         {
-                            dataList = DataReaderMapToList<T>(dataReader, readRecord, out identity);
-                            if (!dataList.Any())
+                            bool successfullyMappedData = DataReaderMapToList<T>(dataReader, statementType, out dataList, out identity);
+                            if (!successfullyMappedData)
                             {
                                 return false;
                             }
@@ -104,20 +100,28 @@ namespace Interfaces
             return true;
         }
 
-        private List<T> DataReaderMapToList<T>(SqlDataReader dataReader, bool readRecord, out string identity)
+        private bool DataReaderMapToList<T>(SqlDataReader dataReader, StatementType statementType, out List<T> readResults, out string identity)
         {
             identity = string.Empty;
-            List<T> list = new List<T>();
+            readResults = new List<T>();
             T obj = default(T);
             while (dataReader.Read())
             {
                 obj = Activator.CreateInstance<T>();
                 // identity
-                if (!readRecord && dataReader.FieldCount == 1)
+                if ((statementType == StatementType.Insert || statementType == StatementType.Update) && dataReader.FieldCount == 1)
                 {
                     var propertyToSet = obj.GetType().GetProperties().First();
                     propertyToSet.SetValue(obj, Convert.ChangeType(dataReader.GetValue(0), propertyToSet.PropertyType));
                     identity = propertyToSet.Name;
+                }
+                else if (statementType == StatementType.Delete)
+                {
+                    var rowsDeleted = (int)dataReader.GetValue(0);
+                    if (rowsDeleted > 0)
+                    {
+                        return true;
+                    }
                 }
                 else
                 {
@@ -129,10 +133,9 @@ namespace Interfaces
                         }
                     }
                 }
-                list.Add(obj);
+                readResults.Add(obj);
             }
-            return list;
+            return readResults.Count > 0;
         }
-
     }
 }

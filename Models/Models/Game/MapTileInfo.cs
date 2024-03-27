@@ -13,7 +13,7 @@ namespace Models.Game
         public float XPosition { get; set; }
         public float YPosition { get; set; }
         public MapTileTypes MapTileType { get; set; }
-        public float ChunkId { get; set; }
+        public long ChunkId { get; set; }
         public bool IsWalkable { get; set; }
     }
 }
