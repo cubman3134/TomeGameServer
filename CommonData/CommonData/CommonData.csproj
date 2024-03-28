@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Enums\MapTileTypes.cs" />
     <Compile Include="Enums\SecurityTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -60,7 +60,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game\MapTileInfo.cs" />
+    <Compile Include="Game\Map\ChunkInfo.cs" />
+    <Compile Include="Game\Map\MapTileInfo.cs" />
     <Compile Include="Game\Server\Player\PlayerLocationUpdate.cs" />
     <Compile Include="Game\Server\Player\PlayerUpdateBase.cs" />
     <Compile Include="Server\ClientInfo.cs" />

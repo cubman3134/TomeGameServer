@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CommonData
 {
-    public class Class1
+    public class Constants
     {
+        public const int ChunkDiameter = 16;
     }
 }

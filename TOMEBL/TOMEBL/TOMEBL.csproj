@@ -43,7 +43,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Map\MapBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CommonData\CommonData\CommonData.csproj">
+      <Project>{6963F234-2D09-4BF1-AAE0-4548D30F9C18}</Project>
+      <Name>CommonData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Models\Models\Models.csproj">
+      <Project>{605759D1-DFAC-4CAD-B60D-7DF0C12AC270}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\TOMEDBDataAccess\TOMEDBDataAccess\TOMEDBDataAccess.csproj">
+      <Project>{BA1CEC77-C91A-4806-A374-85F142696ABF}</Project>
+      <Name>TOMEDBDataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

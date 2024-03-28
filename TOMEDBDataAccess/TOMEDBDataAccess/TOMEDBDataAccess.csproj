@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accessors\ChunkInfoDA.cs" />
     <Compile Include="Accessors\MapTileInfoDA.cs" />
     <Compile Include="DatabaseInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
