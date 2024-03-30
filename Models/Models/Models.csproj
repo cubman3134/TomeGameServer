@@ -62,8 +62,10 @@
   <ItemGroup>
     <Compile Include="Game\Map\ChunkInfo.cs" />
     <Compile Include="Game\Map\MapTileInfo.cs" />
+    <Compile Include="Game\Server\Connection\DisconnectServerMessage.cs" />
     <Compile Include="Game\Server\Player\PlayerLocationUpdate.cs" />
     <Compile Include="Game\Server\Player\PlayerUpdateBase.cs" />
+    <Compile Include="Game\Server\ServerMessageBase.cs" />
     <Compile Include="Server\ClientInfo.cs" />
     <Compile Include="Server\ServerDataPacket.cs" />
     <Compile Include="Web\AccountInfo.cs" />

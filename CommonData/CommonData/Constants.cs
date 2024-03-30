@@ -8,6 +8,15 @@ namespace CommonData
 {
     public class Constants
     {
+        /// <summary>
+        /// Server
+        /// </summary>
+        public const string GameServerIP = "127.0.0.1";
+        public const int GameServerPortNumber = 7010;
+
+        /// <summary>
+        /// Game
+        /// </summary>
         public const int ChunkDiameter = 16;
     }
 }

@@ -18,7 +18,7 @@ namespace TOMEServer.Controllers
         [HttpGet(Name = "GetPlayerUpdates")]
         public WeatherForecast Get()
         {
-            return null;
+            return new WeatherForecast();
         }
     }
 }
