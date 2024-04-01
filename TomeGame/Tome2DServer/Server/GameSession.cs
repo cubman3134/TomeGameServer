@@ -20,8 +20,8 @@ namespace Tome2DServer.Server
             Console.WriteLine($"Game TCP session with Id {Id} connected!");
 
             // Send invite message
-            //string message = "Hello from TCP game! Please send a message or '!' to disconnect the client!";
-            //SendAsync(message);
+            string message = "Hello from TCP game! Please send a message or '!' to disconnect the client!";
+            SendAsync(message);
         }
 
         protected override void OnDisconnected()

@@ -20,9 +20,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TOMEUnitTests", "TOMEUnitTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "..\Interfaces\Interfaces\Interfaces.csproj", "{CCF0AEA7-0AD0-4AC6-8848-916BC2B67864}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tome2DServer", "Tome2DServer\Tome2DServer.csproj", "{5DEEEE5B-7EAC-48E7-BC39-B2DA7A356C73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tome2DServer", "Tome2DServer\Tome2DServer.csproj", "{5DEEEE5B-7EAC-48E7-BC39-B2DA7A356C73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tome2DClient", "Tome2DClient\Tome2DClient.csproj", "{6672E756-09CF-470E-8BE1-49B136928C5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameClient", "GameClient\GameClient.csproj", "{6672E756-09CF-470E-8BE1-49B136928C5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomeClient", "TomeClient\TomeClient.csproj", "{BCD9A9F3-97E2-4C52-919D-509FF0421EA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,6 +64,10 @@ Global
 		{6672E756-09CF-470E-8BE1-49B136928C5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6672E756-09CF-470E-8BE1-49B136928C5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6672E756-09CF-470E-8BE1-49B136928C5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCD9A9F3-97E2-4C52-919D-509FF0421EA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCD9A9F3-97E2-4C52-919D-509FF0421EA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCD9A9F3-97E2-4C52-919D-509FF0421EA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCD9A9F3-97E2-4C52-919D-509FF0421EA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

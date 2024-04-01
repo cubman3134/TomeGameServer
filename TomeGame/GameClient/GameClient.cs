@@ -8,7 +8,7 @@ using System.Text.Json;
 using System.Threading;
 using TcpClient = NetCoreServer.TcpClient;
 
-namespace Tome2DClient
+namespace GameClient
 {
     public class MessageReceivedEventArgs : EventArgs
     {
@@ -20,9 +20,9 @@ namespace Tome2DClient
         public object Message { get; set; }
     }
 
-    public class Tome2DClient : TcpClient
+    public class GameClient : TcpClient
     {
-        public Tome2DClient(string address, int port) : base(address, port) { }
+        public GameClient(string address, int port) : base(address, port) { }
 
         public event EventHandler<MessageReceivedEventArgs> RaiseMessageReceivedEvent;
 

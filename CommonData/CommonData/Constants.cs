@@ -11,8 +11,8 @@ namespace CommonData
         /// <summary>
         /// Server
         /// </summary>
-        public const string GameServerIP = "127.0.0.1";
-        public const int GameServerPortNumber = 7010;
+        public const string GameServerIP = "localhost";
+        public const int GameServerPortNumber = 11420;
 
         /// <summary>
         /// Game

@@ -7,7 +7,7 @@ class Program
     static void Main(string[] args)
     {
         // TCP server port
-        int port = CommonData.Constants.GameServerPortNumber;
+        int port = 11420;
         if (args.Length > 0)
             port = int.Parse(args[0]);
 
