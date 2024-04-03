@@ -7,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace Models.Game.Server
 {
-    public abstract class ServerMessageBase
+    public class ServerMessageBase
     {
-        public Type ServerMessageType { get; set; }
+        public ServerMessageTypes ServerMessageType { get; set; }
         public string SerializedResponse { get; set; }
-
-        public abstract void HandleMessage();
     }
 }

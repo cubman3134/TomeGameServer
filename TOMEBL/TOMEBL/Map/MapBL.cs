@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 using TOMEDBDataAccess.Accessors;
 
 namespace TOMEBL.Map
@@ -41,7 +42,7 @@ namespace TOMEBL.Map
             return mapTiles;
         }
 
-        public static List<MapTileInfo> GetOrGenerateMapInfoAtChunk(float xCoordinate, float yCoordinate)
+        public static List<MapTileInfo> GetOrGenerateMapInfoAtCoordinates(float xCoordinate, float yCoordinate)
         {
             var chunkStartCoordinates = GetChunkStartLocationBasedOnCoordinates(xCoordinate, yCoordinate);
             var chunk = ChunkInfoDA.GetChunkInfoByStartingCoordinates(chunkStartCoordinates.Item1, chunkStartCoordinates.Item2);

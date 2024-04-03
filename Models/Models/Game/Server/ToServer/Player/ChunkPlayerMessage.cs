@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Models.Game.Server.Player
 {
-    public class PlayerUpdateBase : ModelBase
+    public class ChunkPlayerMessage : ServerMessageBase
     {
-
+        public float XLocation { get; set; }
+        public float YLocation { get; set; }
     }
 }

@@ -11,5 +11,6 @@ namespace CommonData.Enums
         Unassigned = 0,
         Connection = 1,
         Disconnection = 2,
+        ChunkPlayerMessage = 3,
     }
 }

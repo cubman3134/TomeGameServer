@@ -1,10 +1,12 @@
 ﻿using Models.Game.Server;
 using Models.Game.Server.Connection;
 using NetCoreServer;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
+using System.Runtime.Serialization.Formatters;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -20,8 +22,8 @@ namespace Tome2DServer.Server
             Console.WriteLine($"Game TCP session with Id {Id} connected!");
 
             // Send invite message
-            string message = "Hello from TCP game! Please send a message or '!' to disconnect the client!";
-            SendAsync(message);
+            //string message = "Hello from TCP game! Please send a message or '!' to disconnect the client!";
+            //SendAsync(message);
         }
 
         protected override void OnDisconnected()
@@ -29,22 +31,36 @@ namespace Tome2DServer.Server
             Console.WriteLine($"Game TCP session with Id {Id} disconnected!");
         }
 
+        private bool SendMessage(ServerMessageBase serverMessage)
+        {
+            var settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto, TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Full };
+            var serializedMessage = Newtonsoft.Json.JsonConvert.SerializeObject(serverMessage, settings);
+            return SendAsync(serializedMessage);
+        }
+
         protected override void OnReceived(byte[] buffer, long offset, long size)
         {
             string message = Encoding.UTF8.GetString(buffer, (int)offset, (int)size);
             Console.WriteLine("Incoming: " + message);
-            var deserializedBaseMessage = JsonSerializer.Deserialize<ServerMessageBase>(message);
-            Type messageType = deserializedBaseMessage?.ServerMessageType ?? typeof(ServerMessageBase);
-            var deserializedMessage = JsonSerializer.Deserialize(message, messageType) ?? new object();
-            ((ServerMessageBase)deserializedMessage).HandleMessage();
+            var settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto, TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Full };
+            var deserializedBaseMessage = Newtonsoft.Json.JsonConvert.DeserializeObject(message, settings);
+            //Type messageType = deserializedBaseMessage?.ServerMessageType ?? typeof(ServerMessageBase);
+            var deserializedMessage = Newtonsoft.Json.JsonConvert.DeserializeObject(message, settings);
+
+            //var deserializedMessage = JsonSerializer.Deserialize(message, messageType) ?? new object();
+            var response = TOMEBL.Server.ServerMessageBL.ProcessServerMessage((ServerMessageBase)deserializedMessage);
+            /*if (response != null)
+            {
+                SendMessage(response);
+            }*/
             // Multicast message to all connected sessions
             //Server.Multicast(message);
 
             // If the buffer starts with '!' the disconnect the current session
-            if (messageType == typeof(DisconnectServerMessage))
+            /*if (messageType == typeof(DisconnectServerMessage))
             {
                 Disconnect();
-            }
+            }*/
         }
 
         protected override void OnError(SocketError error)

@@ -8,9 +8,6 @@ namespace Models.Game.Server.Connection
 {
     public class DisconnectServerMessage : ServerMessageBase
     {
-        public override void HandleMessage()
-        {
-            
-        }
+
     }
 }
