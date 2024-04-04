@@ -10,6 +10,7 @@ using System.Runtime.Serialization.Formatters;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using TOMEBL.Server;
 
 namespace Tome2DServer.Server
 {
@@ -31,7 +32,7 @@ namespace Tome2DServer.Server
             Console.WriteLine($"Game TCP session with Id {Id} disconnected!");
         }
 
-        private bool SendMessage(ServerMessageBase serverMessage)
+        private bool SendMessage(object serverMessage)
         {
             var settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto, TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Full };
             var serializedMessage = Newtonsoft.Json.JsonConvert.SerializeObject(serverMessage, settings);
@@ -43,16 +44,13 @@ namespace Tome2DServer.Server
             string message = Encoding.UTF8.GetString(buffer, (int)offset, (int)size);
             Console.WriteLine("Incoming: " + message);
             var settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto, TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Full };
-            var deserializedBaseMessage = Newtonsoft.Json.JsonConvert.DeserializeObject(message, settings);
-            //Type messageType = deserializedBaseMessage?.ServerMessageType ?? typeof(ServerMessageBase);
             var deserializedMessage = Newtonsoft.Json.JsonConvert.DeserializeObject(message, settings);
 
-            //var deserializedMessage = JsonSerializer.Deserialize(message, messageType) ?? new object();
-            var response = TOMEBL.Server.ServerMessageBL.ProcessServerMessage((ServerMessageBase)deserializedMessage);
-            /*if (response != null)
+            var response = ServerMessageBL.ProcessMessageFromClient((ServerMessageBase)deserializedMessage);
+            if (response != null)
             {
                 SendMessage(response);
-            }*/
+            }
             // Multicast message to all connected sessions
             //Server.Multicast(message);
 
