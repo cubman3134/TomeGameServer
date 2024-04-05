@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualBasic;
+using System;
 using System.Net;
-using Tome2DServer.Server;
+using TomeServer.Server;
 
 
 class Program
@@ -18,7 +19,6 @@ class Program
 
         // Create a new TCP chat server
         var server = new GameServer(IPAddress.Any, port);
-
         // Start the server
         Console.Write("Server starting...");
         server.Start();
@@ -29,7 +29,7 @@ class Program
         // Perform text input
         for (; ; )
         {
-            string? line = Console.ReadLine();
+            string line = Console.ReadLine();
             if (string.IsNullOrEmpty(line))
                 break;
 

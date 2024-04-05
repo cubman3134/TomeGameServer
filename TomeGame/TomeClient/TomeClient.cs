@@ -42,8 +42,9 @@ namespace TomeClient
 
         public void SendMessage(object data)
         {
-            var serializedData = JsonConvert.SerializeObject(data);
-            var bytes = Encoding.UTF8.GetBytes(serializedData);
+            var settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto, TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Full };
+            var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(data, typeof(object), settings);
+            var bytes = Encoding.UTF8.GetBytes(jsonString);
             SendBytes(bytes);
         }
     }

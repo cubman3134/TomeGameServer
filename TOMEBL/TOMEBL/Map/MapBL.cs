@@ -56,7 +56,7 @@ namespace TOMEBL.Map
                 ChunkInfoDA.InsertRecord(chunk);
             }
             var mapTiles = MapTileInfoDA.GetAllMapTileInfoByChunkId(chunk.ChunkId);
-            if (mapTiles != null)
+            if (mapTiles != null && mapTiles.Count != 0)
             {
                 return mapTiles;
             }

@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomeClient", "TomeClient\To
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tome2D", "D:\GodotProjects\Tome2D\Tome2D.csproj", "{EA678DB4-21BA-4730-8649-D633A71C30D6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TomeServer", "TomeServer\TomeServer.csproj", "{4BB38A2D-C513-443B-B777-461A85BC39C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -106,6 +108,14 @@ Global
 		{EA678DB4-21BA-4730-8649-D633A71C30D6}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
 		{EA678DB4-21BA-4730-8649-D633A71C30D6}.Release|Any CPU.ActiveCfg = ExportRelease|Any CPU
 		{EA678DB4-21BA-4730-8649-D633A71C30D6}.Release|Any CPU.Build.0 = ExportRelease|Any CPU
+		{4BB38A2D-C513-443B-B777-461A85BC39C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BB38A2D-C513-443B-B777-461A85BC39C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BB38A2D-C513-443B-B777-461A85BC39C8}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BB38A2D-C513-443B-B777-461A85BC39C8}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{4BB38A2D-C513-443B-B777-461A85BC39C8}.ExportRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{4BB38A2D-C513-443B-B777-461A85BC39C8}.ExportRelease|Any CPU.Build.0 = Release|Any CPU
+		{4BB38A2D-C513-443B-B777-461A85BC39C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BB38A2D-C513-443B-B777-461A85BC39C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
