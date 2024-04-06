@@ -167,30 +167,25 @@ namespace TomeServer.Server
             return true;
         }
 
-        public virtual long Send(byte[] buffer)
-        {
-            return Send(buffer);
-        }
-
         /*public virtual long Send(byte[] buffer, long offset, long size)
         {
             return Send(buffer.AsSpan((int)offset, (int)size));
-        }
+        }*/
 
-        public virtual long Send(ReadOnlySpan<byte> buffer)
+        public virtual long Send(byte[] buffer)
         {
             if (!IsConnected)
             {
                 return 0L;
             }
 
-            if (buffer.IsEmpty)
+            if (buffer.Length == 0)
             {
                 return 0L;
             }
 
-            SocketError errorCode;
-            long num = Socket.Send(buffer, SocketFlags.None, out errorCode);
+            Socket.Send(buffer, 0, buffer.Length, SocketFlags.None, out SocketError errorCode);
+            long num = Socket.Send(buffer);
             if (num > 0)
             {
                 BytesSent += num;
@@ -205,7 +200,7 @@ namespace TomeServer.Server
             }
 
             return num;
-        }*/
+        }
 
         public virtual long Send(string text)
         {
@@ -217,24 +212,19 @@ namespace TomeServer.Server
             return Send(Encoding.UTF8.GetBytes(text.ToArray()));
         }*/
 
-        public virtual bool SendAsync(byte[] buffer)
-        {
-            return SendAsync(buffer);
-        }
-
         /*public virtual bool SendAsync(byte[] buffer, long offset, long size)
         {
             return SendAsync(buffer.AsSpan((int)offset, (int)size));
-        }
+        }*/
 
-        public virtual bool SendAsync(ReadOnlySpan<byte> buffer)
+        public virtual bool SendAsync(byte[] buffer)
         {
             if (!IsConnected)
             {
                 return false;
             }
 
-            if (buffer.IsEmpty)
+            if (buffer.Length == 0)
             {
                 return true;
             }
@@ -259,7 +249,7 @@ namespace TomeServer.Server
             }
 
             return true;
-        }*/
+        }
 
         public virtual bool SendAsync(string text)
         {
